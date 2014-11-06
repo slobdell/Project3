@@ -10,14 +10,14 @@ public class Correspondence {
 	private double correspondenceStrength;
 	private ArrayList<Transformation> transformations = new ArrayList<>();
 	private double avgTransformationEase = 0.0;
-	
+
 	public Correspondence (Object_Frame currentObj, Object_Frame goalObj, double strength)
 	{
 		this.current = currentObj;
 		this.goal = goalObj;
 		this.correspondenceStrength = strength;
 	}
-	
+
 	public Object_Frame getGoal()
 	{
 		return this.goal;
@@ -30,13 +30,13 @@ public class Correspondence {
 	{
 		return this.correspondenceStrength;
 	}
-	
+
 	public void printCorrespondence()
 	{
-		
+
 		System.out.println("Object " + this.current.getName() + " corresponds to " + this.goal.getName() + " with " + this.correspondenceStrength);
 	}
-	
+
 	public boolean greatherThan(Correspondence comparisonCorrespondence)
 	{
 		if (this.correspondenceStrength > comparisonCorrespondence.getSimilarity())
@@ -48,9 +48,14 @@ public class Correspondence {
 			return false;
 		}
 	}
-	
+
 	public boolean lessThan(Correspondence comparisonCorrespondence)
 	{
+        // for cases like this you could simplify:
+        //
+        // return this.correspondenceStrength < comparisonCorrespondence.getSimilarity()
+        //
+        // less is more.  The fewer lines the better...true in the vast majority of cases
 		if (this.correspondenceStrength < comparisonCorrespondence.getSimilarity())
 		{
 			return true;
@@ -70,7 +75,7 @@ public class Correspondence {
 		this.avgTransformationEase = this.deteremineTransformationEase();
 
 	}
-	
+
 	public double deteremineTransformationEase()
 	{
 		double sum = 0.0;
@@ -91,7 +96,7 @@ public class Correspondence {
 	public boolean transformationsEqual(Correspondence comparisonCorrespondence)
 	{
 		ArrayList <Transformation> comparisonTransformations = comparisonCorrespondence.getTransformations();
-		
+
 		int transformationMatchCounter = 0;
 		boolean transformationMatch = false;
 		if (this.transformations.size() == comparisonTransformations.size())
@@ -103,7 +108,7 @@ public class Correspondence {
 					if (this.transformations.get(i).getLabel().equals(comparisonTransformations.get(j).getLabel()))
 					{
 						transformationMatchCounter++;
-						
+
 					}
 					else
 					{
@@ -132,7 +137,7 @@ public class Correspondence {
 		{
 			transformationMatch = false;
 		}
-		
+
 			return transformationMatch;
 	}
 
@@ -140,7 +145,7 @@ public class Correspondence {
 	{
 		return this.avgTransformationEase;
 	}
-	
+
 	public boolean containsTransformation(String tranformationType)
 	{
 		for (int i = 0; i < this.transformations.size(); i++)
@@ -150,7 +155,7 @@ public class Correspondence {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 }
